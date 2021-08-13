@@ -1,6 +1,6 @@
 # Recommended C style and coding rules
 
-This document describes C code style used by Tilen MAJERLE in his projects and libraries.
+reference origin : 
 
 ## Table of Contents
 
@@ -460,7 +460,8 @@ foo(void) {
 ```c
 int32_t a, b;
 a = foo();
-if (a) {
+if (a) 
+{
     int32_t c, d;   /* OK, c and d are in if-statement scope */
     c = foo();
     int32_t e;      /* Wrong, there was already executable statement inside block -  biến e đc khai báo dưới 1 function */
@@ -487,17 +488,7 @@ char *p, *n;
 
 ## Structures, enumerations, typedefs
 
-- Structure or enumeration name must be lowercase with optional underscore `_` character between words
-- Structure or enumeration may contain `typedef` keyword
-- All structure members must be lowercase
-- All enumeration members must be uppercase
-- Structure/enumeration must follow doxygen documentation syntax
-
-(
-  Tất cả kiểu `struct`, `enum` đều dùng kí tự thường và có ngăn bằng dấu gạch dưới
-  Tất cacr các thành viên của struct là kí tự thường
-  Tất cả thành viên của enum là kí tự Hoa??
-  ???
+- Khai báo struct, enum: tên của  `struct` và `enum` được viết hoa chữ cái đầu 
 ```c  
   Enum Names: https://users.ece.cmu.edu/~eno/coding/CCodingStandard.html#enames
 Labels All Upper Case with '_' Word Separators
@@ -508,6 +499,24 @@ Example
       PIN_OFF,
       PIN_ON
    };
+   
+ /* hoặc:  */ 
+ struct _GtkWrapBoxPrivate
+{
+  GtkOrientation orientation;
+  GtkWrapAllocationMode mode;
+
+  GtkWrapBoxSpreading horizontal_spreading;
+  GtkWrapBoxSpreading vertical_spreading;
+
+  guint16 spacing[2];
+
+  guint16 minimum_line_children;
+  guint16 natural_line_children;
+
+  GList *children;
+};
+   
 ```
 )
 When structure is declared, it may use one of `3` different options:
@@ -521,7 +530,8 @@ struct struct_name {
 ```
 2. When structure is declared with *typedef only*, it *has to* contain `_t` suffix after its name.
 ```c
-typedef struct {
+typedef struct 
+{
     char* a;
     char b;
 } struct_name_t;
@@ -551,19 +561,22 @@ typedef struct {
 } a;
 
 /* Corrected version */
-typedef struct {
+typedef struct 
+{
     int32_t a;
     int32_t b;
 } a_t;
 
 /* Wrong name, it must not include _t suffix */
-struct name_t {
+struct name_t 
+{
     int32_t a;
     int32_t b;
 };
 
 /* Wrong parameters, must be all uppercase */
-typedef enum {
+typedef enum 
+{
     MY_ENUM_TESTA,
     my_enum_testb,
 } my_enum_t;
@@ -572,7 +585,8 @@ typedef enum {
 - When initializing structure on declaration, use `C99` initialization style
 ```c
 /* OK */
-a_t a = {
+a_t a = 
+{
     .a = 4,
     .b = 5,
 };
@@ -681,9 +695,7 @@ if (a) do_a(); else do_b();
 - Empty `while`, `do-while` or `for` loops must include brackets
 ```c
 /* OK */
-while (is_register_bit_set())
-{
-}
+while (is_register_bit_set()){}
 
 /* Wrong */
 while (is_register_bit_set());
